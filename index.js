@@ -219,7 +219,7 @@ app.delete(
 
 app.use(errorHandler);
 
-app.listen(port, () => {
+const server = app.listen(port, () => {
   console.log(`Server is listening on http://localhost:${port}`);
 });
 
@@ -240,3 +240,6 @@ const swaggerOptions = {
 
 const swaggerDocs = swaggerJsDoc(swaggerOptions);
 app.use("/api-docs", swaggerUI.serve, swaggerUI.setup(swaggerDocs));
+
+
+module.exports = {app, server}
