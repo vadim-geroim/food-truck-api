@@ -2,7 +2,7 @@ const express = require("express");
 const { body, param, validationResult } = require("express-validator");
 const errorHandler = require("./helpers/errorHandler");
 const app = express();
-const port = 3000;
+const port = process.env.PORT || 3000;
 
 //Import mock data
 const foodTrucks = require("./data/trucks-data.json");
