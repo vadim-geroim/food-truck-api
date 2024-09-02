@@ -44,6 +44,13 @@ app.put("/food-trucks/:locationid", (req, res) => {
     }
   });
 
+//Add a new food truck
+app.post("/food-trucks", (req, res) => {
+    const newTruck = req.body;
+    foodTrucks.data.push(newTruck); //The data is stored in memory, just for the demonstration purpose.
+    res.status(201).json(newTruck);
+  });
+
 app.listen(port, () => {
   console.log(`Server is listening on http://localhost:${port}`);
 });
