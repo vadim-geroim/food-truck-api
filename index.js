@@ -3,6 +3,8 @@ const { body, param, validationResult } = require("express-validator");
 const errorHandler = require("./helpers/errorHandler");
 const app = express();
 const port = process.env.PORT || 3000;
+const fs = require('fs');
+const path = require('path');
 
 //Import mock data
 const foodTrucks = require("./data/trucks-data.json");
@@ -239,6 +241,12 @@ const swaggerOptions = {
 };
 
 const swaggerDocs = swaggerJsDoc(swaggerOptions);
+const swaggerFilePath = path.join(__dirname, 'openapi-spec.json');
+fs.writeFileSync(swaggerFilePath, JSON.stringify(swaggerDocs, null, 2));
+
+app.get('/openapi-spec.json', (req, res) => {
+  res.sendFile(path.join(__dirname, 'openapi-spec.json'));
+});
 app.use("/api-docs", swaggerUI.serve, swaggerUI.setup(swaggerDocs));
 
 

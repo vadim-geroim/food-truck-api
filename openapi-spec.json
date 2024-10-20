@@ -1,0 +1,138 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Food Truck API",
+    "version": "1.0.0",
+    "description": "API for managing food trucks"
+  },
+  "paths": {
+    "/food-trucks": {
+      "get": {
+        "summary": "Retrieve a list of food trucks",
+        "responses": {
+          "200": {
+            "description": "A list of food trucks",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "summary": "Add a new food truck",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "The food truck was successfully created"
+          },
+          "400": {
+            "description": "Invalid input"
+          }
+        }
+      }
+    },
+    "/food-trucks/{locationid}": {
+      "get": {
+        "summary": "Retrieve a food truck by locationid",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "locationid",
+            "schema": {
+              "type": "integer"
+            },
+            "required": true,
+            "description": "Numeric ID of the food truck to get"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A single food truck",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Food truck not found"
+          }
+        }
+      },
+      "put": {
+        "summary": "Update an existing food truck",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "locationid",
+            "schema": {
+              "type": "integer"
+            },
+            "required": true,
+            "description": "Numeric ID of the food truck to update"
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "The food truck was successfully updated"
+          },
+          "404": {
+            "description": "Food truck not found"
+          }
+        }
+      },
+      "delete": {
+        "summary": "Delete a food truck",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "locationid",
+            "schema": {
+              "type": "integer"
+            },
+            "required": true,
+            "description": "Numeric ID of the food truck to delete"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The food truck was successfully deleted"
+          },
+          "404": {
+            "description": "Food truck not found"
+          }
+        }
+      }
+    }
+  },
+  "components": {},
+  "tags": []
+}
